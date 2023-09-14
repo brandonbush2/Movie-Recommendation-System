@@ -39,3 +39,44 @@ For this project, I am provided with two datasets. The first dataset, which I'll
 The second dataset, which I'll refer to as the "User Rating Data" dataset, captures user interactions with movies, specifically their ratings. It consists of three columns: 'userId,' 'movieId,' and 'rating.' The 'userId' column represents unique user identifiers, enabling the association of each rating with a specific user. The 'movieId' column links each rating to a movie in the Movie Data dataset, facilitating the creation of user-movie relationships. The 'rating' column stores user-assigned ratings, typically on a numerical scale, indicating user preferences for movies. This dataset is instrumental in building collaborative filtering models, as it forms the basis for understanding user behavior and preferences. It allows the system to recommend movies to users based on the ratings and preferences of similar users, enhancing personalization and user satisfaction in the movie recommendation process.
 
 ## Modeling
+### Baseline Model
+In this project, I'll use Singular Value Decomposition (SVD), a matrix factorization technique, to build the recommendation system. I'll start with a baseline model, assess it's performance, and then tune the model with grid search to obtain the best parameters.
+
+### Baseline RMSE score
+test_rmse =  0.8735
+
+The baseline model had an accuracy score of 87.35%. 
+I used cross validation with 5 kfolds.
+An accuracy of 87.35% means that the model was accurately predicting the ratings for movies a user hasn't watched by this percentage. Not bad for a baseline model with default parameters.
+
+### Final Model
+After performing grid search to obtain best parameters for the final model:
+
+> Best Parameters:
+`'n_factors': 200, 'reg_all': 0.05, 'lr_all': 0.01`
+
+### Final RMSE score
+test_rmse =  0.9096
+
+The final model had an accuracy score of about 91%.
+This means that the model was accurately providing predictions by 91%.
+
+#### Making recommendations
+I defined a function to make recommendations based on the predicted ratings for a user's unwatched movies. The function was using the fitted final model to generate predictions and the output was the top 5 recommendations.
+
+## Evaluation
+To evaluate the model, I used cross validation with 5 kfolds to obtain the above rmse scores.
+Also, I sampled a random user, `user438`, obtained their highly rated movie genres, and using the model I made recommendations for their unwatched movies.
+
+#### Highly Rated genres by  user438
+![Highly rated](Images/rated.png)
+
+I compared the resulting predicted genres to the highly rated ones and they were similar.
+
+#### Recommended Movies
+![Predcited](Images/Predicted.png)
+
+## Conclusion
+In this project, I successfully developed a movie recommendation system that harnesses user ratings to suggest films. With a commendable 91% accuracy rate, the model is proficient at aligning user preferences with movie recommendations. This accuracy reflects the system's ability to assist users in discovering movies they're likely to enjoy, enhancing their overall movie-watching experience. Having a robust recommendation system plays an important role in both increasing user satisfaction and contributing to the overall success of movie platforms. A well-designed recommendation system can lead to a win-win scenario for users and the platform itself.
+
+A good recommendation system significantly enhances user satisfaction. It does this by tailoring movie suggestions to individual preferences, making it easier for users to discover content that is in line with their tastes. This personalization minimizes the time users spend searching for movies and maximizes their time enjoying content, leading to a more enjoyable and efficient movie-watching experience. When users consistently find movies they love through the platform, they are more likely to remain engaged and loyal, which in turn increases their overall satisfaction. This, in essence, transforms casual viewers into dedicated users, promoting long-term user retention and loyalty.
